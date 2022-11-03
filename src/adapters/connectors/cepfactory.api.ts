@@ -4,9 +4,9 @@ import { IAddressEntity } from '../../domain/entities/andress.entity';
 export abstract class CepFactory {
     public abstract factoryMethod(): Cep;
 
-    public preencheEndereco(cep: string): Promise<IAddressEntity | undefined> {
+    public fillAddress(cep: string): Promise<IAddressEntity | undefined> {
         const cepProvider = this.factoryMethod();
 
-        return cepProvider.buscaEndereco(cep);
+        return cepProvider.searchAddress(cep);
     }
 }

@@ -8,14 +8,14 @@ export default function (client: IClientEntity) {
         cpf: client.cpf,
         PhoneNumber: client.PhoneNumber
     }
-    let address = undefined;
-    if('address' in client){
-        address = { ...client.address, ...{ id_client: undefined } };
+    let addresses = undefined;
+    if('addresses' in client){
+        addresses = { ...client.addresses, ...{ id_client: undefined } };
     }
     
     return {
         clients: clients,
-        address: address
+        addresses: addresses
     };
 
 }

@@ -24,7 +24,7 @@ class ApiCep {
                 const dateCep = yield responseCep.json();
                 return {
                     cep: dateCep.code,
-                    logradouro: dateCep.address,
+                    logradouro: dateCep.addresses,
                     bairro: dateCep.district,
                     cidade: dateCep.city,
                     estado: dateCep.state

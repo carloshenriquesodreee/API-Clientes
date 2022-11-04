@@ -4,7 +4,7 @@ import { MysqlDatabase } from "../../infrastructure/mysql/mysql.database";
 import { IClientsRepository } from "../../domain/repository/clients.repository";
 import * as Sequelize from 'sequelize';
 import clientsModelsMysqlDatabase from "../../infrastructure/mysql/models/clients/clients.models.mysql.database";
-import addressModelsMysqlDatabase from "../../infrastructure/mysql/models/address/address.models.mysql.database";
+import addressModelsMysqlDatabase from "../../infrastructure/mysql/models/addresses/addresses.models.mysql.database";
 import modelToEntitiesClientsMysqlDatabase from "../../infrastructure/mysql/helpers/clients/modelToEntities.clients.mysql.database";
 import entitiesToModelsClientsMysqlDatabase from "../../infrastructure/mysql/helpers/clients/entitiesToModels.clients.mysql.database";
 
@@ -24,12 +24,12 @@ export class ClientsRepository implements IClientsRepository {
         return modelToEntitiesClientsMysqlDatabase(userOne);
     }
     async create (resource: IClientEntity): Promise<IClientEntity> {
-        const { clients, address } = entitiesToModelsClientsMysqlDatabase(resource)
+        const { clients, addresses } = entitiesToModelsClientsMysqlDatabase(resource)
         const modelClients = await this._database.create(this._modelClients,clients)
 
-        if(address){
-            address.id_client = modelClients.null;
-            const modelAddress = await this._database.create(this._modelAddresses,address)
+        if(addresses){
+            addresses.id_client = modelClients.null;
+            const modelAddress = await this._database.create(this._modelAddresses,addresses)
         }
 
         resource.id_client = modelClients.null;
@@ -41,7 +41,7 @@ export class ClientsRepository implements IClientsRepository {
     }
     async list(): Promise<IClientEntity[]> {
         const clients = await this._database.list(this._modelClients, {include:[
-            'Addresses'
+            'addresses'
         ]});
         const client = clients.map(modelToEntitiesClientsMysqlDatabase);
 
@@ -51,14 +51,14 @@ export class ClientsRepository implements IClientsRepository {
         
         let clientModel = await this._database.read(this._modelClients, resource.id_client!, {
             include: [
-                'address'
+                'addresses'
             ]
         });
-        const { clients, address} = entitiesToModelsClientsMysqlDatabase(resource);
+        const { clients, addresses} = entitiesToModelsClientsMysqlDatabase(resource);
         await this._database.update(clientModel, clients);
 
-        if(address){
-            await this._database.update(clientModel.getAddress(), address);
+        if(addresses){
+            await this._database.update(clientModel.getAddress(), addresses);
         }
         return resource;
     }

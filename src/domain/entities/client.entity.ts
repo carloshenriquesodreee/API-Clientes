@@ -1,8 +1,8 @@
-import { IAddressEntity } from "./address.entity"
+import { IAddressesEntity } from "./addresses.entity"
 
 export interface IClientEntity {
     id_client: number,
-    address?: IAddressEntity,
+    addresses?: IAddressesEntity,
     cep: string,
     name: string,
     cpf: String,

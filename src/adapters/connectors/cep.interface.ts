@@ -1,5 +1,5 @@
-import { IAddressEntity } from '../../domain/entities/address.entity';
+import { IAddressesEntity } from '../../domain/entities/addresses.entity';
 
 export interface Cep {
-    searchAddress(cep: string): Promise<IAddressEntity | undefined>;
+    searchAddress(cep: string): Promise<IAddressesEntity | undefined>;
 }

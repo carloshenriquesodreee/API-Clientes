@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClientsRepository = void 0;
 const mysql_database_1 = require("../../infrastructure/mysql/mysql.database");
 const clients_models_mysql_database_1 = __importDefault(require("../../infrastructure/mysql/models/clients/clients.models.mysql.database"));
-const address_models_mysql_database_1 = __importDefault(require("../../infrastructure/mysql/models/address/address.models.mysql.database"));
+const addresses_models_mysql_database_1 = __importDefault(require("../../infrastructure/mysql/models/addresses/addresses.models.mysql.database"));
 const modelToEntities_clients_mysql_database_1 = __importDefault(require("../../infrastructure/mysql/helpers/clients/modelToEntities.clients.mysql.database"));
 const entitiesToModels_clients_mysql_database_1 = __importDefault(require("../../infrastructure/mysql/helpers/clients/entitiesToModels.clients.mysql.database"));
 class ClientsRepository {
@@ -36,11 +36,11 @@ class ClientsRepository {
     }
     create(resource) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { clients, address } = (0, entitiesToModels_clients_mysql_database_1.default)(resource);
+            const { clients, addresses } = (0, entitiesToModels_clients_mysql_database_1.default)(resource);
             const modelClients = yield this._database.create(this._modelClients, clients);
-            if (address) {
-                address.id_client = modelClients.null;
-                const modelAddress = yield this._database.create(this._modelAddresses, address);
+            if (addresses) {
+                addresses.id_client = modelClients.null;
+                const modelAddress = yield this._database.create(this._modelAddresses, addresses);
             }
             resource.id_client = modelClients.null;
             return resource;
@@ -55,7 +55,7 @@ class ClientsRepository {
     list() {
         return __awaiter(this, void 0, void 0, function* () {
             const clients = yield this._database.list(this._modelClients, { include: [
-                    'Addresses'
+                    'addresses'
                 ] });
             const client = clients.map(modelToEntities_clients_mysql_database_1.default);
             return client;
@@ -65,17 +65,17 @@ class ClientsRepository {
         return __awaiter(this, void 0, void 0, function* () {
             let clientModel = yield this._database.read(this._modelClients, resource.id_client, {
                 include: [
-                    'address'
+                    'addresses'
                 ]
             });
-            const { clients, address } = (0, entitiesToModels_clients_mysql_database_1.default)(resource);
+            const { clients, addresses } = (0, entitiesToModels_clients_mysql_database_1.default)(resource);
             yield this._database.update(clientModel, clients);
-            if (address) {
-                yield this._database.update(clientModel.getAddress(), address);
+            if (addresses) {
+                yield this._database.update(clientModel.getAddress(), addresses);
             }
             return resource;
         });
     }
 }
 exports.ClientsRepository = ClientsRepository;
-exports.default = new ClientsRepository(mysql_database_1.MysqlDatabase.getInstance(), clients_models_mysql_database_1.default, address_models_mysql_database_1.default);
+exports.default = new ClientsRepository(mysql_database_1.MysqlDatabase.getInstance(), clients_models_mysql_database_1.default, addresses_models_mysql_database_1.default);

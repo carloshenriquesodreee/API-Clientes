@@ -24,9 +24,9 @@ class CreateClientUseCase {
     }
     execute(data) {
         return __awaiter(this, void 0, void 0, function* () {
-            data.address = yield this._viaCep.fillAddress(data.cep);
-            if (!data.address) {
-                data.address = yield this._apiCep.fillAddress(data.cep);
+            data.addresses = yield this._viaCep.fillAddress(data.cep);
+            if (!data.addresses) {
+                data.addresses = yield this._apiCep.fillAddress(data.cep);
             }
             return yield this._repository.create(data);
         });

@@ -12,10 +12,10 @@ export class CreateClientUseCase implements IUseCase {
 
     }
     async execute(data: IClientEntity): Promise<IClientEntity | undefined> {
-        data.address = await this._viaCep.fillAddress(data.cep);
+        data.addresses = await this._viaCep.fillAddress(data.cep);
         
-        if(!data.address){
-            data.address = await this._apiCep.fillAddress(data.cep);
+        if(!data.addresses){
+            data.addresses = await this._apiCep.fillAddress(data.cep);
         }
         return await this._repository.create(data);
     }

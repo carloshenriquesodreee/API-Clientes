@@ -17,14 +17,14 @@ function default_1(client) {
         clients.cpf = client.cpf;
         clients.PhoneNumber = client.PhoneNumber;
     }
-    if (client.address) {
-        clients.address = {
-            cep: client.address.cep,
-            logradouro: client.address.logradouro,
-            complemento: client.address.complemento,
-            bairro: client.address.bairro,
-            cidade: client.address.cidade,
-            estado: client.address.estado
+    if (client.addresses) {
+        clients.addresses = {
+            cep: client.addresses.cep,
+            logradouro: client.addresses.logradouro,
+            complemento: client.addresses.complemento,
+            bairro: client.addresses.bairro,
+            cidade: client.addresses.cidade,
+            estado: client.addresses.estado
         };
     }
     return clients;

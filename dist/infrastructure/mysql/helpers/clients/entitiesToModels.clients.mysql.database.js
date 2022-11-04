@@ -8,13 +8,13 @@ function default_1(client) {
         cpf: client.cpf,
         PhoneNumber: client.PhoneNumber
     };
-    let address = undefined;
-    if ('address' in client) {
-        address = Object.assign(Object.assign({}, client.address), { id_client: undefined });
+    let addresses = undefined;
+    if ('addresses' in client) {
+        addresses = Object.assign(Object.assign({}, client.addresses), { id_client: undefined });
     }
     return {
         clients: clients,
-        address: address
+        addresses: addresses
     };
 }
 exports.default = default_1;

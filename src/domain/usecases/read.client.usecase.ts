@@ -9,8 +9,8 @@ class ReadClientUseCase implements IUseCase {
 
     }
 
-    async execute(data: { clientId: number }): Promise<IClientEntity | undefined> {
-        return await this._repository.readById(data.clientId);
+    async execute(data: { id_client: number }): Promise<IClientEntity | undefined> {
+        return await this._repository.readById(data.id_client);
     }
 }
 

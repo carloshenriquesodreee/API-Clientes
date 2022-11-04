@@ -12,11 +12,11 @@ export class ClientsRepository implements IClientsRepository {
     constructor(
         private _database: IDatabaseModel,
         private _modelClients: Sequelize.ModelCtor<Sequelize.Model<any, any>>,
-        private _modelAddress: Sequelize.ModelCtor<Sequelize.Model<any, any>>,
+        private _modelAddresses: Sequelize.ModelCtor<Sequelize.Model<any, any>>,
     ){
-        this._modelClients.hasOne(this._modelAddress, {
+        this._modelClients.hasOne(this._modelAddresses, {
             foreignKey: 'id_client',
-            as: 'address'
+            as: 'addresses'
         });
     }
     async readById(resourceId: number): Promise<IClientEntity | undefined> {
@@ -29,7 +29,7 @@ export class ClientsRepository implements IClientsRepository {
 
         if(address){
             address.id_client = modelClients.null;
-            const modelAddress = await this._database.create(this._modelAddress,address)
+            const modelAddress = await this._database.create(this._modelAddresses,address)
         }
 
         resource.id_client = modelClients.null;
@@ -37,12 +37,11 @@ export class ClientsRepository implements IClientsRepository {
     }
     async deleteById(resourceId: number): Promise<void> {
         await this._database.delete(this._modelClients, {id_client:resourceId});
-        await this._database.delete(this._modelAddress, {id_client:resourceId});
+        await this._database.delete(this._modelAddresses, {id_client:resourceId});
     }
     async list(): Promise<IClientEntity[]> {
         const clients = await this._database.list(this._modelClients, {include:[
-            'clients',
-            'address'
+            'Addresses'
         ]});
         const client = clients.map(modelToEntitiesClientsMysqlDatabase);
 

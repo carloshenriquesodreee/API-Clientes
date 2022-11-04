@@ -19,13 +19,13 @@ const address_models_mysql_database_1 = __importDefault(require("../../infrastru
 const modelToEntities_clients_mysql_database_1 = __importDefault(require("../../infrastructure/mysql/helpers/clients/modelToEntities.clients.mysql.database"));
 const entitiesToModels_clients_mysql_database_1 = __importDefault(require("../../infrastructure/mysql/helpers/clients/entitiesToModels.clients.mysql.database"));
 class ClientsRepository {
-    constructor(_database, _modelClients, _modelAddress) {
+    constructor(_database, _modelClients, _modelAddresses) {
         this._database = _database;
         this._modelClients = _modelClients;
-        this._modelAddress = _modelAddress;
-        this._modelClients.hasOne(this._modelAddress, {
+        this._modelAddresses = _modelAddresses;
+        this._modelClients.hasOne(this._modelAddresses, {
             foreignKey: 'id_client',
-            as: 'address'
+            as: 'addresses'
         });
     }
     readById(resourceId) {
@@ -40,7 +40,7 @@ class ClientsRepository {
             const modelClients = yield this._database.create(this._modelClients, clients);
             if (address) {
                 address.id_client = modelClients.null;
-                const modelAddress = yield this._database.create(this._modelAddress, address);
+                const modelAddress = yield this._database.create(this._modelAddresses, address);
             }
             resource.id_client = modelClients.null;
             return resource;
@@ -49,14 +49,13 @@ class ClientsRepository {
     deleteById(resourceId) {
         return __awaiter(this, void 0, void 0, function* () {
             yield this._database.delete(this._modelClients, { id_client: resourceId });
-            yield this._database.delete(this._modelAddress, { id_client: resourceId });
+            yield this._database.delete(this._modelAddresses, { id_client: resourceId });
         });
     }
     list() {
         return __awaiter(this, void 0, void 0, function* () {
             const clients = yield this._database.list(this._modelClients, { include: [
-                    'clients',
-                    'address'
+                    'Addresses'
                 ] });
             const client = clients.map(modelToEntities_clients_mysql_database_1.default);
             return client;

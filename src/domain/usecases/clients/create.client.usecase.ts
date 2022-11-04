@@ -1,10 +1,10 @@
-import { IClientEntity } from "../entities/client.entity";
-import { IClientsRepository } from "../repository/clients.repository";
-import clientsRepository from "../../adapters/repositories/clients.repository";
-import { IUseCase } from "./usecase.interface";
-import { ViaCepFactory } from "../../infrastructure/apis/cep/viacepfactory.api";
-import { ApiCepFactory } from "../../infrastructure/apis/cep/apicepfactory.api";
-import { CepFactory } from "../../adapters/connectors/cepfactory.api";
+import { IClientEntity } from "../../entities/client.entity";
+import { IClientsRepository } from "../../repository/clients.repository";
+import clientsRepository from "../../../adapters/repositories/clients.repository";
+import { IUseCase } from "../usecase.interface";
+import { ViaCepFactory } from "../../../infrastructure/apis/cep/viacepfactory.api";
+import { ApiCepFactory } from "../../../infrastructure/apis/cep/apicepfactory.api";
+import { CepFactory } from "../../../adapters/connectors/cepfactory.api";
 
 export class CreateClientUseCase implements IUseCase {
 

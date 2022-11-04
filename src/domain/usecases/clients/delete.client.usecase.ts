@@ -1,6 +1,6 @@
-import { IClientsRepository } from "../repository/clients.repository";
-import clientsRepository from "../../adapters/repositories/clients.repository";
-import { IUseCase } from "./usecase.interface";
+import { IClientsRepository } from "../../repository/clients.repository";
+import clientsRepository from "../../../adapters/repositories/clients.repository";
+import { IUseCase } from "../usecase.interface";
 
 class DeleteClientUseCase implements IUseCase {
 

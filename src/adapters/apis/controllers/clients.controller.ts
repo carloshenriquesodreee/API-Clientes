@@ -1,9 +1,9 @@
 import express from 'express';
-import createClientUsecase from '../../../domain/usecases/create.client.usecase';
-import readClientUsecase from '../../../domain/usecases/read.client.usecase';
-import updateClientUsecase from '../../../domain/usecases/update.client.usecase';
-import deleteClientUsecase from '../../../domain/usecases/delete.client.usecase';
-import listClientUsecase from '../../../domain/usecases/list.client.usecase';
+import createClientUsecase from '../../../domain/usecases/clients/create.client.usecase';
+import readClientUsecase from '../../../domain/usecases/clients/read.client.usecase';
+import updateClientUsecase from '../../../domain/usecases/clients/update.client.usecase';
+import deleteClientUsecase from '../../../domain/usecases/clients/delete.client.usecase';
+import listClientUsecase from '../../../domain/usecases/clients/list.client.usecase';
 import debug from 'debug';
 
 const log: debug.IDebugger = debug('app:clients-controller');

@@ -19,7 +19,7 @@ export default {
                     model: {
                         tableName: 'clients'
                     },
-                    key: 'id_client'
+                    key: 'idpessoa'
                 }
             }
         });

@@ -16,11 +16,17 @@ export class ClientsRepository implements IClientsRepository {
     ){
         this._modelClients.hasOne(this._modelAddresses, {
             foreignKey: 'id_client',
-            as: 'addresses'
+            as: 'addresses',
+            onDelete: "CASCADE"
+            
         });
     }
     async readById(resourceId: number): Promise<IClientEntity | undefined> {
-        const userOne = await this._database.read(this._modelClients, resourceId);
+        const userOne = await this._database.read(this._modelClients, resourceId,  {
+            include:[
+                'addresses'
+            ]
+        });
         return modelToEntitiesClientsMysqlDatabase(userOne);
     }
     async create (resource: IClientEntity): Promise<IClientEntity> {

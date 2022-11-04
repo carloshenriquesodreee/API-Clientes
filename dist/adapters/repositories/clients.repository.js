@@ -25,12 +25,17 @@ class ClientsRepository {
         this._modelAddresses = _modelAddresses;
         this._modelClients.hasOne(this._modelAddresses, {
             foreignKey: 'id_client',
-            as: 'addresses'
+            as: 'addresses',
+            onDelete: "CASCADE"
         });
     }
     readById(resourceId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const userOne = yield this._database.read(this._modelClients, resourceId);
+            const userOne = yield this._database.read(this._modelClients, resourceId, {
+                include: [
+                    'addresses'
+                ]
+            });
             return (0, modelToEntities_clients_mysql_database_1.default)(userOne);
         });
     }

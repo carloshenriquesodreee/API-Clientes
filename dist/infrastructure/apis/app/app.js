@@ -33,6 +33,8 @@ const expressWinston = __importStar(require("express-winston"));
 const cors_1 = __importDefault(require("cors"));
 const debug_1 = require("debug");
 const clients_routes_1 = require("../../../adapters/apis/routes/clients.routes");
+const user_controller_1 = require("../../../adapters/apis/routes/user.controller");
+const auth_routes_1 = require("../../../adapters/apis/routes/auth.routes");
 const app = (0, express_1.default)();
 const server = http.createServer(app);
 const port = 3000;
@@ -50,6 +52,8 @@ if (!process.env.DEBUG) {
 }
 app.use(expressWinston.logger(loggerOptions));
 routes.push(new clients_routes_1.ClientsRoutes(app));
+routes.push(new user_controller_1.UserRoutes(app));
+routes.push(new auth_routes_1.AuthRoutes(app));
 const runningMessage = `Servidor rodando na porta ${port}`;
 app.get('/', (req, res) => {
     res.status(200).send(runningMessage);

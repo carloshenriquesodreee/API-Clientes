@@ -3,17 +3,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserRoutes = void 0;
-const user_controller_1 = __importDefault(require("../controllers/user.controller"));
+exports.AuthRoutes = void 0;
 const common_routes_1 = require("./common.routes");
-class UserRoutes extends common_routes_1.CommonRoutesConfig {
+const auth_controller_1 = __importDefault(require("../controllers/auth.controller"));
+class AuthRoutes extends common_routes_1.CommonRoutesConfig {
     constructor(app) {
-        super(app, 'UserRoutes');
+        super(app, 'AuthRoutes');
     }
     configureRoutes() {
-        this.app.route(`/user`)
-            .post(user_controller_1.default.createUser);
+        this.app.route(`/login`)
+            .post(auth_controller_1.default.login);
         return this.app;
     }
 }
-exports.UserRoutes = UserRoutes;
+exports.AuthRoutes = AuthRoutes;

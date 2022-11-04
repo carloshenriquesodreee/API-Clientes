@@ -1,4 +1,4 @@
-import { IAddressEntity } from '../../../domain/entities/andress.entity';
+import { IAddressEntity } from '../../../domain/entities/address.entity';
 import { Cep } from '../../../adapters/connectors/cep.interface';
 import fetch from "node-fetch";
 

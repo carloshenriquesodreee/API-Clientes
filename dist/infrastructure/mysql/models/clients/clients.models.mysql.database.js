@@ -33,5 +33,5 @@ exports.default = mysql_database_1.MysqlDatabase.getInstance().createModel('clie
     cep: Sequelize.DataTypes.STRING,
     name: Sequelize.DataTypes.STRING,
     cpf: Sequelize.DataTypes.STRING,
-    PhoneNumber: Sequelize.DataTypes.NUMBER
+    PhoneNumber: Sequelize.DataTypes.STRING
 });

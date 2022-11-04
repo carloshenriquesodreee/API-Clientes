@@ -1,4 +1,4 @@
-import { IAddressEntity } from "./andress.entity"
+import { IAddressEntity } from "./address.entity"
 
 export interface IClientEntity {
     id_client: number,

@@ -11,7 +11,7 @@ export default {
             cep: Sequelize.DataTypes.STRING,
             name: Sequelize.DataTypes.STRING,
             cpf: Sequelize.DataTypes.STRING,
-            PhoneNumber: Sequelize.DataTypes.INTEGER
+            PhoneNumber: Sequelize.DataTypes.STRING
         });
     },
     down: (queryInterface: Sequelize.QueryInterface) => {

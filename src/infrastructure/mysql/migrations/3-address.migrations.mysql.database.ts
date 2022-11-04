@@ -2,8 +2,8 @@ import * as Sequelize from 'sequelize';
 
 export default {
     up: (queryInterface: Sequelize.QueryInterface) => {
-        return queryInterface.createTable('address', {
-            idenderecos: {
+        return queryInterface.createTable('addresses', {
+            idaddress: {
                 type: Sequelize.DataTypes.INTEGER,
                 primaryKey: true,
                 autoIncrement: true
@@ -25,6 +25,6 @@ export default {
         });
     },
     down: (queryInterface: Sequelize.QueryInterface) => {
-        return queryInterface.dropTable('address');
+        return queryInterface.dropTable('addresses');
     }
 }

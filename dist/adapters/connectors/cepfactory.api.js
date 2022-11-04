@@ -2,9 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CepFactory = void 0;
 class CepFactory {
-    preencheEndereco(cep) {
+    fillAddress(cep) {
         const cepProvider = this.factoryMethod();
-        return cepProvider.buscaEndereco(cep);
+        return cepProvider.searchAddress(cep);
     }
 }
 exports.CepFactory = CepFactory;

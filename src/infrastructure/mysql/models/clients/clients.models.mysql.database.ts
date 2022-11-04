@@ -9,5 +9,5 @@ export default MysqlDatabase.getInstance().createModel ('clients', {
     cep: Sequelize.DataTypes.STRING,
     name: Sequelize.DataTypes.STRING,
     cpf: Sequelize.DataTypes.STRING,
-    PhoneNumber: Sequelize.DataTypes.NUMBER
+    PhoneNumber: Sequelize.DataTypes.STRING
 });

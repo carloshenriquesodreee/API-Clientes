@@ -4,7 +4,7 @@ import { MysqlDatabase } from "../../infrastructure/mysql/mysql.database";
 import { IClientsRepository } from "../../domain/repository/clients.repository";
 import * as Sequelize from 'sequelize';
 import clientsModelsMysqlDatabase from "../../infrastructure/mysql/models/clients/clients.models.mysql.database";
-import addressModelsMysqlDatabase from "../../infrastructure/mysql/models/adresses/address.models.mysql.database";
+import addressModelsMysqlDatabase from "../../infrastructure/mysql/models/address/address.models.mysql.database";
 import modelToEntitiesClientsMysqlDatabase from "../../infrastructure/mysql/helpers/clients/modelToEntities.clients.mysql.database";
 import entitiesToModelsClientsMysqlDatabase from "../../infrastructure/mysql/helpers/clients/entitiesToModels.clients.mysql.database";
 

@@ -15,19 +15,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ApiCep = void 0;
 const node_fetch_1 = __importDefault(require("node-fetch"));
 class ApiCep {
-    buscaEndereco(cep) {
+    searchAddress(cep) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const responseCep = yield (0, node_fetch_1.default)(`https://cdn.apicep.com/file/apicep/${cep.slice(0, 5)}-${cep.slice(5, 8)}.json`);
                 if (responseCep.status != 200)
                     return;
-                const dataCep = yield responseCep.json();
+                const dateCep = yield responseCep.json();
                 return {
-                    cep: dataCep.code,
-                    logradouro: dataCep.address,
-                    bairro: dataCep.district,
-                    cidade: dataCep.city,
-                    estado: dataCep.state
+                    cep: dateCep.code,
+                    logradouro: dateCep.address,
+                    bairro: dateCep.district,
+                    cidade: dateCep.city,
+                    estado: dateCep.state
                 };
             }
             catch (error) {

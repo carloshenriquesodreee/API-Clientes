@@ -17,6 +17,16 @@ function default_1(client) {
         clients.cpf = client.cpf;
         clients.PhoneNumber = client.PhoneNumber;
     }
+    if (client.address) {
+        clients.address = {
+            cep: client.address.cep,
+            logradouro: client.address.logradouro,
+            complemento: client.address.complemento,
+            bairro: client.address.bairro,
+            cidade: client.address.cidade,
+            estado: client.address.estado
+        };
+    }
     return clients;
 }
 exports.default = default_1;

@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ViaCep = void 0;
 const node_fetch_1 = __importDefault(require("node-fetch"));
 class ViaCep {
-    buscaEndereco(cep) {
+    searchAddress(cep) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const responseCep = yield (0, node_fetch_1.default)(`https://viacep.com.br/ws/${cep}/json/`);

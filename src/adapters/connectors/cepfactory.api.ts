@@ -1,5 +1,5 @@
 import { Cep } from './cep.interface';
-import { IAddressEntity } from '../../domain/entities/andress.entity';
+import { IAddressEntity } from '../../domain/entities/address.entity';
 
 export abstract class CepFactory {
     public abstract factoryMethod(): Cep;

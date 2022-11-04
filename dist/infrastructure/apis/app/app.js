@@ -32,7 +32,7 @@ const winston = __importStar(require("winston"));
 const expressWinston = __importStar(require("express-winston"));
 const cors_1 = __importDefault(require("cors"));
 const debug_1 = require("debug");
-const clients_controller_1 = require("../../../adapters/apis/routes/clients.controller");
+const clients_routes_1 = require("../../../adapters/apis/routes/clients.routes");
 const app = (0, express_1.default)();
 const server = http.createServer(app);
 const port = 3000;
@@ -49,7 +49,7 @@ if (!process.env.DEBUG) {
     loggerOptions.meta = false;
 }
 app.use(expressWinston.logger(loggerOptions));
-routes.push(new clients_controller_1.ClientsRoutes(app));
+routes.push(new clients_routes_1.ClientsRoutes(app));
 const runningMessage = `Servidor rodando na porta ${port}`;
 app.get('/', (req, res) => {
     res.status(200).send(runningMessage);

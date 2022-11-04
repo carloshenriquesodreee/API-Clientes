@@ -7,7 +7,7 @@ import cors from 'cors';
 import {debug} from "debug";
 
 import { CommonRoutesConfig } from "../../../adapters/apis/routes/common.routes";
-import { ClientsRoutes } from "../../../adapters/apis/routes/clients.controller";
+import { ClientsRoutes } from "../../../adapters/apis/routes/clients.routes";
 
 const app: express.Application = express();
 const server: http.Server = http.createServer(app);

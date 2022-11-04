@@ -12,11 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const create_client_usecase_1 = __importDefault(require("../../../domain/usecases/create.client.usecase"));
-const read_client_usecase_1 = __importDefault(require("../../../domain/usecases/read.client.usecase"));
-const update_client_usecase_1 = __importDefault(require("../../../domain/usecases/update.client.usecase"));
-const delete_client_usecase_1 = __importDefault(require("../../../domain/usecases/delete.client.usecase"));
-const list_client_usecase_1 = __importDefault(require("../../../domain/usecases/list.client.usecase"));
+const create_client_usecase_1 = __importDefault(require("../../../domain/usecases/clients/create.client.usecase"));
+const read_client_usecase_1 = __importDefault(require("../../../domain/usecases/clients/read.client.usecase"));
+const update_client_usecase_1 = __importDefault(require("../../../domain/usecases/clients/update.client.usecase"));
+const delete_client_usecase_1 = __importDefault(require("../../../domain/usecases/clients/delete.client.usecase"));
+const list_client_usecase_1 = __importDefault(require("../../../domain/usecases/clients/list.client.usecase"));
 const debug_1 = __importDefault(require("debug"));
 const log = (0, debug_1.default)('app:clients-controller');
 class ClientsController {

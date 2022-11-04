@@ -1,21 +1,18 @@
-import express from 'express';
-import debug from 'debug';
-import  LoggerAuthUseCase  from '../../../domain/usecases/logger/logger.usecase';
+import { CommonRoutesConfig } from "./common.routes";
+import express from "express";
+import authController from "../controllers/auth.controller";
 
-const log: debug.IDebugger = debug('app:auth-controller');
+export class AuthRoutes extends CommonRoutesConfig {
+    constructor(app: express.Application) {
+        super(app, 'AuthRoutes');
+    }
 
-class AuthController {
-    async login(req: express.Request, res: express.Response){
-        const users = await LoggerAuthUseCase.execute(req.body);
-        if(users){
-            res.status(200).send(users);
-        } else {
-            res.status(401).send({
-                error: `Dados incorretos.`
-            });
-        }
-        
+    configureRoutes(): express.Application {
+        this.app.route(`/login`)
+            .post(
+                authController.login
+            );
+
+        return this.app;
     }
 }
-
-export default new AuthController();

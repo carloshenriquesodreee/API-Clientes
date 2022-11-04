@@ -86,5 +86,15 @@ class MysqlDatabase {
             timestamps: false
         });
     }
+    readByWhere(model, dataWhere) {
+        try {
+            return model.findOne({
+                where: dataWhere
+            });
+        }
+        catch (err) {
+            throw new Error(err.message);
+        }
+    }
 }
 exports.MysqlDatabase = MysqlDatabase;

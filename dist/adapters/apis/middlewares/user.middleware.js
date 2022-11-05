@@ -25,7 +25,7 @@ class userMiddleware {
                 next();
             }
             else {
-                response.status(404).send('email repetido');
+                response.status(404).send('E-mail informado já cadastrado');
             }
         });
     }

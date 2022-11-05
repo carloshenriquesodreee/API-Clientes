@@ -8,6 +8,7 @@ import {debug} from "debug";
 
 import { CommonRoutesConfig } from "../../../adapters/apis/routes/common.routes";
 import { ClientsRoutes } from "../../../adapters/apis/routes/clients.routes";
+
 import { UserRoutes } from "../../../adapters/apis/routes/user.routes";
 import { AuthRoutes } from "../../../adapters/apis/routes/auth.routes";
 

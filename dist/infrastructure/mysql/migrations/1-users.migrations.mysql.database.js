@@ -34,7 +34,9 @@ exports.default = {
             },
             name: Sequelize.DataTypes.STRING,
             password: Sequelize.DataTypes.STRING,
-            email: Sequelize.DataTypes.STRING
+            email: { type: Sequelize.DataTypes.STRING,
+                unique: true
+            }
         });
     },
     down: (queryInterface) => {

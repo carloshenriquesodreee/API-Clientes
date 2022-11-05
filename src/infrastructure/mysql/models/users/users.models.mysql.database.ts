@@ -7,6 +7,9 @@ export default MysqlDatabase.getInstance() .createModel('users', {
         primaryKey: true,
     },
     name: Sequelize.DataTypes.STRING,
-    email: Sequelize.DataTypes.STRING,
-    password: Sequelize.DataTypes.STRING
+    password: Sequelize.DataTypes.STRING,
+    email: {
+       type: Sequelize.DataTypes.STRING,
+       unique: true
+    }
 });

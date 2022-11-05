@@ -83,7 +83,7 @@ class MysqlDatabase {
     }
     createModel(name, properties) {
         return this._adapter.define(name, properties, {
-            timestamps: false
+            timestamps: false,
         });
     }
     readByWhere(model, dataWhere) {

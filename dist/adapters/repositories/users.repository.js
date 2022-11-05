@@ -17,6 +17,7 @@ const mysql_database_1 = require("../../infrastructure/mysql/mysql.database");
 const entitiesToModels_users_mysql_database_1 = __importDefault(require("../../infrastructure/mysql/helpers/users/entitiesToModels.users,mysql.database"));
 const modelToEntities_users_mysql_database_1 = __importDefault(require("../../infrastructure/mysql/helpers/users/modelToEntities.users.mysql.database"));
 const users_models_mysql_database_1 = __importDefault(require("../../infrastructure/mysql/models/users/users.models.mysql.database"));
+const crypto_pass_user_1 = __importDefault(require("../helpers/crypto.pass.user"));
 class UserRepository {
     constructor(_database, _modelUser) {
         this._database = _database;
@@ -27,6 +28,7 @@ class UserRepository {
             const { users } = (0, entitiesToModels_users_mysql_database_1.default)(resource);
             const modelUser = yield this._database.create(this._modelUser, users);
             resource.id_user = modelUser.null;
+            resource.password = (0, crypto_pass_user_1.default)(resource.password);
             return modelUser;
         });
     }
@@ -41,6 +43,18 @@ class UserRepository {
             }
             catch (err) {
                 throw new Error(err.message);
+            }
+        });
+    }
+    list() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const users = yield this._database.list(this._modelUser);
+                const listOfUsers = users.map(modelToEntities_users_mysql_database_1.default);
+                return listOfUsers;
+            }
+            catch (error) {
+                throw new Error(error.message);
             }
         });
     }

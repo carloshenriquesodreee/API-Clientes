@@ -7,6 +7,9 @@ import { ApiCepFactory } from "../../../infrastructure/apis/cep/apicepfactory.ap
 import { CepFactory } from "../../../adapters/connectors/cepfactory.api";
 
 export class CreateClientUseCase implements IUseCase {
+    findOne(body: any): any {
+        throw new Error('Method not implemented.');
+    }
 
     constructor(private _repository: IClientsRepository, private _viaCep: CepFactory, private _apiCep: CepFactory) {
 

@@ -31,6 +31,9 @@ exports.default = mysql_database_1.MysqlDatabase.getInstance().createModel('user
         primaryKey: true,
     },
     name: Sequelize.DataTypes.STRING,
-    email: Sequelize.DataTypes.STRING,
-    password: Sequelize.DataTypes.STRING
+    password: Sequelize.DataTypes.STRING,
+    email: {
+        type: Sequelize.DataTypes.STRING,
+        unique: true
+    }
 });

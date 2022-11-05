@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const debug_1 = __importDefault(require("debug"));
 const create_usecase_1 = __importDefault(require("../../../domain/usecases/users/create.usecase"));
+const list_user_usecase_1 = __importDefault(require("../../../domain/usecases/users/list.user.usecase"));
 const log = (0, debug_1.default)('app:users-controller');
 class UsersController {
     createUser(req, res) {
@@ -21,6 +22,12 @@ class UsersController {
             const users = yield create_usecase_1.default.execute(req.body);
             log(users);
             res.status(201).send(users);
+        });
+    }
+    list(request, response) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const users = yield list_user_usecase_1.default.execute();
+            response.status(200).send(users);
         });
     }
 }

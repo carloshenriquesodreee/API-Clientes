@@ -6,10 +6,9 @@ import modelToEntitiesUsersMysqlDatabase from "../../infrastructure/mysql/helper
 import { IUserEntity } from "../../domain/entities/user.entity";
 import { IDatabaseModel } from "../../infrastructure/persistence/databaseModel.interface";
 import usersModelsMysqlDatabase from "../../infrastructure/mysql/models/users/users.models.mysql.database";
-
+import cryptoPassUser from "../helpers/crypto.pass.user";
 
 export class UserRepository implements IUserRepository {
-
     constructor(
         private _database: IDatabaseModel,
         private _modelUser: Sequelize.ModelCtor<Sequelize.Model<any, any>>
@@ -18,6 +17,7 @@ export class UserRepository implements IUserRepository {
             const { users } = entitiesToModelsUsersMysqlDatabase(resource);
             const modelUser = await this._database.create(this._modelUser, users);
             resource.id_user = modelUser.null;
+            resource.password = cryptoPassUser(resource.password);
             return modelUser;  
     }
     async readByWhere(email: string, password: string): Promise<IUserEntity | undefined> {
@@ -32,8 +32,19 @@ export class UserRepository implements IUserRepository {
             throw new Error((err as Error).message);
         }
     }
+    async list(): Promise<IUserEntity[]> {
+        try {
+            const users = await this._database.list(this._modelUser);
+            const listOfUsers = users.map(modelToEntitiesUsersMysqlDatabase)
+            return listOfUsers;
+        } catch (error) {
+            throw new Error((error as Error).message);
+        }
+    }
 }
 export default new UserRepository(
     MysqlDatabase.getInstance(),
     usersModelsMysqlDatabase
+
 )
+

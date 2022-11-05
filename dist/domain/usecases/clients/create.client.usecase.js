@@ -22,6 +22,9 @@ class CreateClientUseCase {
         this._viaCep = _viaCep;
         this._apiCep = _apiCep;
     }
+    findOne(body) {
+        throw new Error('Method not implemented.');
+    }
     execute(data) {
         return __awaiter(this, void 0, void 0, function* () {
             data.addresses = yield this._viaCep.fillAddress(data.cep);

@@ -2,7 +2,7 @@
 
 
 Primeiro utilize o comando:
--npm install
+npm install
 
 Segundo configure o arquivo 
 .env

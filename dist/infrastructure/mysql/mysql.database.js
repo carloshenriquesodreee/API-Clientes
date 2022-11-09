@@ -81,10 +81,15 @@ class MysqlDatabase {
     read(model, dataId, includes) {
         return model.findByPk(dataId, includes);
     }
-    createModel(name, properties) {
-        return this._adapter.define(name, properties, {
-            timestamps: false,
-        });
+    listOneByWhere(model, dataWhere) {
+        try {
+            return model.findOne({
+                where: dataWhere
+            });
+        }
+        catch (error) {
+            throw new Error(error.message);
+        }
     }
     readByWhere(model, dataWhere) {
         try {
@@ -95,6 +100,11 @@ class MysqlDatabase {
         catch (err) {
             throw new Error(err.message);
         }
+    }
+    createModel(name, properties) {
+        return this._adapter.define(name, properties, {
+            timestamps: false,
+        });
     }
 }
 exports.MysqlDatabase = MysqlDatabase;

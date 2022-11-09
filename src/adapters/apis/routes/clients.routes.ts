@@ -10,8 +10,8 @@ export class ClientsRoutes extends CommonRoutesConfig {
 
     configureRoutes(): express.Application {
         this.app.route(`/clients`)
-            .all(authMiddleware.checkAuth)
-            .get(clientsController.listClients)
+            .get(authMiddleware.checkAuth,
+                clientsController.listClients)
             .post(clientsController.createClient)
     
         this.app.route(`/clients/:id_client`)

@@ -20,7 +20,9 @@ export default {
                         tableName: 'clients'
                     },
                     key: 'idpessoa'
-                }
+                },
+                onDelete: 'CASCADE',
+                
             }
         });
     },
@@ -28,3 +30,13 @@ export default {
         return queryInterface.dropTable('addresses');
     }
 }
+
+
+
+
+
+
+
+
+
+

@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserRepository = void 0;
+const bcrypt_1 = __importDefault(require("bcrypt"));
 const mysql_database_1 = require("../../infrastructure/mysql/mysql.database");
 const entitiesToModels_users_mysql_database_1 = __importDefault(require("../../infrastructure/mysql/helpers/users/entitiesToModels.users,mysql.database"));
 const modelToEntities_users_mysql_database_1 = __importDefault(require("../../infrastructure/mysql/helpers/users/modelToEntities.users.mysql.database"));
@@ -25,11 +26,10 @@ class UserRepository {
     }
     create(resource) {
         return __awaiter(this, void 0, void 0, function* () {
+            resource.password = (0, crypto_pass_user_1.default)(resource.password);
             const { users } = (0, entitiesToModels_users_mysql_database_1.default)(resource);
             const modelUser = yield this._database.create(this._modelUser, users);
-            resource.id_user = modelUser.null;
-            resource.password = (0, crypto_pass_user_1.default)(resource.password);
-            return modelUser;
+            return (0, modelToEntities_users_mysql_database_1.default)(resource);
         });
     }
     readByWhere(email, password) {
@@ -52,6 +52,29 @@ class UserRepository {
                 const users = yield this._database.list(this._modelUser);
                 const listOfUsers = users.map(modelToEntities_users_mysql_database_1.default);
                 return listOfUsers;
+            }
+            catch (error) {
+                throw new Error(error.message);
+            }
+        });
+    }
+    listLogin(email, password) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const foundUser = yield this._database.listOneByWhere(this._modelUser, {
+                    email: email
+                });
+                if (foundUser) {
+                    if (bcrypt_1.default.compareSync(password, foundUser.password)) {
+                        return (0, modelToEntities_users_mysql_database_1.default)(foundUser);
+                    }
+                    else {
+                        return;
+                    }
+                }
+                else {
+                    return;
+                }
             }
             catch (error) {
                 throw new Error(error.message);

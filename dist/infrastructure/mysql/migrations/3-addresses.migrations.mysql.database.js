@@ -44,7 +44,8 @@ exports.default = {
                         tableName: 'clients'
                     },
                     key: 'idpessoa'
-                }
+                },
+                onDelete: 'CASCADE',
             }
         });
     },

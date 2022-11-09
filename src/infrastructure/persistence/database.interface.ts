@@ -4,4 +4,5 @@ export interface IDatabase {
     read(type: any, dataId: any): any,
     update(type: any, data: any): any,
     delete(type: any, dataId: any): any
+    listOneByWhere(type: any, properties: any): any
 }

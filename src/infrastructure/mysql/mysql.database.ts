@@ -57,14 +57,14 @@ export class MysqlDatabase implements IDatabaseModel {
         return model.findByPk(dataId, includes);
     }
 
-    createModel(name: string, properties: Sequelize.ModelAttributes): Sequelize.ModelCtor<Sequelize.Model<any, any>> {
-        return this._adapter.define(
-            name,
-            properties,
-            {
-                timestamps: false,
-            }
-        )
+    listOneByWhere(model: Sequelize.ModelCtor<Sequelize.Model<any, any>>, dataWhere: Sequelize.WhereOptions<any>): any {
+        try {
+            return model.findOne({
+                where: dataWhere
+            })
+        } catch (error) {
+            throw new Error((error as Error).message);
+        }
     }
     readByWhere(model: Sequelize.ModelCtor<Sequelize.Model<any, any>>, dataWhere: Sequelize.WhereOptions<any>): any {
         try{
@@ -75,4 +75,14 @@ export class MysqlDatabase implements IDatabaseModel {
             throw new Error((err as Error).message);
         }
     }
+    createModel(name: string, properties: Sequelize.ModelAttributes): Sequelize.ModelCtor<Sequelize.Model<any, any>> {
+        return this._adapter.define(
+            name,
+            properties,
+            {
+                timestamps: false,
+            }
+        )
+    }
+    
 }

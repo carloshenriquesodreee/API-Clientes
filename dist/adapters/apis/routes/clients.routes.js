@@ -13,8 +13,7 @@ class ClientsRoutes extends common_routes_1.CommonRoutesConfig {
     }
     configureRoutes() {
         this.app.route(`/clients`)
-            .all(auth_middleware_1.default.checkAuth)
-            .get(clients_controller_1.default.listClients)
+            .get(auth_middleware_1.default.checkAuth, clients_controller_1.default.listClients)
             .post(clients_controller_1.default.createClient);
         this.app.route(`/clients/:id_client`)
             .all(auth_middleware_1.default.checkAuth)

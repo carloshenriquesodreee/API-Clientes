@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt'
 import { MysqlDatabase } from "../../infrastructure/mysql/mysql.database";
 import { IUserRepository } from "../../domain/repository/user.repository";
 import * as Sequelize from 'sequelize';
@@ -14,11 +15,10 @@ export class UserRepository implements IUserRepository {
         private _modelUser: Sequelize.ModelCtor<Sequelize.Model<any, any>>
         ){}
         async create(resource: IUserEntity): Promise<IUserEntity> {
+            resource.password = cryptoPassUser(resource.password);
             const { users } = entitiesToModelsUsersMysqlDatabase(resource);
             const modelUser = await this._database.create(this._modelUser, users);
-            resource.id_user = modelUser.null;
-            resource.password = cryptoPassUser(resource.password);
-            return modelUser;  
+            return modelToEntitiesUsersMysqlDatabase(resource)!;  
     }
     async readByWhere(email: string, password: string): Promise<IUserEntity | undefined> {
         try{
@@ -37,6 +37,24 @@ export class UserRepository implements IUserRepository {
             const users = await this._database.list(this._modelUser);
             const listOfUsers = users.map(modelToEntitiesUsersMysqlDatabase)
             return listOfUsers;
+        } catch (error) {
+            throw new Error((error as Error).message);
+        }
+    }
+    async listLogin(email: string, password: string): Promise<IUserEntity | undefined> {
+        try {
+            const foundUser: IUserEntity = await this._database.listOneByWhere(this._modelUser, {
+                email: email
+            });
+            if (foundUser) {
+                if (bcrypt.compareSync(password, foundUser.password)) {
+                    return modelToEntitiesUsersMysqlDatabase(foundUser);
+                } else {
+                    return
+                }
+            } else {
+                return
+            }
         } catch (error) {
             throw new Error((error as Error).message);
         }

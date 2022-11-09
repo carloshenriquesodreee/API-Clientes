@@ -37,7 +37,7 @@ const user_routes_1 = require("../../../adapters/apis/routes/user.routes");
 const auth_routes_1 = require("../../../adapters/apis/routes/auth.routes");
 const app = (0, express_1.default)();
 const server = http.createServer(app);
-const port = 3000;
+const port = 3001;
 const routes = [];
 const debugLog = (0, debug_1.debug)('app');
 app.use(express_1.default.json());

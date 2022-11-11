@@ -53,8 +53,8 @@ class ClientsRepository {
     }
     deleteById(resourceId) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this._database.delete(this._modelClients, { id_client: resourceId });
             yield this._database.delete(this._modelAddresses, { id_client: resourceId });
+            yield this._database.delete(this._modelClients, { id_client: resourceId });
         });
     }
     list() {

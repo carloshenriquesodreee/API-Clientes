@@ -30,7 +30,7 @@ exports.default = {
             id_user: {
                 type: Sequelize.DataTypes.INTEGER,
                 primaryKey: true,
-                autoIncrement: true
+                autoIncrement: true,
             },
             name: Sequelize.DataTypes.STRING,
             password: Sequelize.DataTypes.STRING,

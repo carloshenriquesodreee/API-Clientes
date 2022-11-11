@@ -42,9 +42,11 @@ export class ClientsRepository implements IClientsRepository {
         return resource;
     }
     async deleteById(resourceId: number): Promise<void> {
-        await this._database.delete(this._modelClients, {id_client:resourceId});
         await this._database.delete(this._modelAddresses, {id_client:resourceId});
+        await this._database.delete(this._modelClients, {id_client:resourceId});
+
     }
+
     async list(): Promise<IClientEntity[]> {
         const clients = await this._database.list(this._modelClients, {include:[
             'addresses'

@@ -6,7 +6,7 @@ export default {
             id_user: {
                 type: Sequelize.DataTypes.INTEGER,
                 primaryKey: true,
-                autoIncrement: true
+                autoIncrement: true,
             },
             name: Sequelize.DataTypes.STRING,
             password: Sequelize.DataTypes.STRING,
@@ -16,6 +16,6 @@ export default {
         });
     },
     down: (queryInterface: Sequelize.QueryInterface) => {
-        return queryInterface.dropTable('users');
+        return queryInterface.dropTable('users',);
     }
 }
